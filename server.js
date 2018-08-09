@@ -1,8 +1,20 @@
+// import packages
 const express = require("express");
+const mongoose = require("mongoose");
 
+//initialize express
 const app = express();
 
-app.get("/", (req, res) => res.send("hello"));
+// DB Config
+const db = require("./config/keys").mongoURI;
+
+// Connect to MongoDB
+mongoose
+  .connect(db)
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+app.get("/", (req, res) => res.send("hello!"));
 
 const port = process.env.PORT || 5000;
 
