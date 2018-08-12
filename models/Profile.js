@@ -64,7 +64,7 @@ const ProfileSchema = new Schema({
       }
     }
   ],
-  education: {
+  education: [
     {
       school: {
         type: String,
@@ -94,7 +94,7 @@ const ProfileSchema = new Schema({
       }
     }
   ],
-social: {
+  social: {
     youtube: {
       type: String
     },
