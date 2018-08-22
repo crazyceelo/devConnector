@@ -21,7 +21,10 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
-// Login - Get user token
+/**
+ * Login - Get user token
+ * @param {*} userData - name and password
+ */
 export const loginUser = userData => dispatch => {
   axios
     .post("/api/users/login", userData)
