@@ -9,7 +9,7 @@ import store from "./store";
 // impourt auth
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser } from "./actions/authActions";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 // import router
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -29,6 +29,16 @@ if (localStorage.jwtToken) {
   const decode = jwt_decode(localStorage.jwtToken);
   // set user and isAuthenticated
   store.dispatch(setCurrentUser(decode));
+  // check for expired token
+  const currentTime = Date.now() / 1000;
+  if (decode.exp < currentTime) {
+    // Logout User
+    store.dispatch(logoutUser());
+    // Todo: clear current profile
+
+    // redirect to login
+    window.location.href = "/login";
+  }
 }
 
 class App extends Component {
