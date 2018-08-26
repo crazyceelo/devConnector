@@ -21,7 +21,7 @@ const SelectListGroup = ({ name, value, error, info, onChange, options }) => {
       >
         {selectOptions}
       </select>
-      {info && <small className-="form-test text-muted">{info} </small>}
+      {info && <small className="form-test text-muted">{info} </small>}
       {error && <div className="invalid-feedback">{error} </div>}
     </div>
   );
