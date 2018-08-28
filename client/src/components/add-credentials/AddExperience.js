@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 
 // fields
-import { TextFieldGroup } from "../common/TextFieldGroup";
-import { TextAreaFieldGroup } from "../common/TextAreaFieldGroup";
+import TextFieldGroup from "../common/TextFieldGroup";
+import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 
 // action
 
@@ -23,7 +23,29 @@ class AddExperience extends Component {
       errors: {},
       disabled: false
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCheck = this.onCheck.bind(this);
   }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    console.log("submit");
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onCheck(e) {
+    this.setState({
+      disabled: !this.state.disabled,
+      current: !this.state.current
+    });
+  }
+
   render() {
     const { errors } = this.state;
 
@@ -79,6 +101,33 @@ class AddExperience extends Component {
                   error={errors.to}
                   disabled={this.state.disabled ? "disabled" : ""}
                 />
+                <div className="form-check mb-4">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    name="current"
+                    value={this.state.current}
+                    checked={this.state.current}
+                    onChange={this.onCheck}
+                    id="current"
+                  />
+                  <label htmlFor="current" className="form-check-label">
+                    Current Job
+                  </label>
+                  <TextAreaFieldGroup
+                    placeholder="Job Description"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.onChange}
+                    error={errors.description}
+                    info="Tell us about the position"
+                  />
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="btn btn-info btn-block mt-4"
+                  />
+                </div>
               </form>
             </div>
           </div>
