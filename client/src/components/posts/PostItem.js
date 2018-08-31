@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
+// import classnames from "classnames";
 import { Link } from "react-router-dom";
 
 //actions
@@ -22,7 +22,7 @@ class PostItem extends Component {
               <img
                 className="rounded-circle d-none d-md-block"
                 src={post.avatar}
-                alt=""
+                alt="test"
               />
             </a>
             <br />
