@@ -49,7 +49,10 @@ export const getPosts = () => dispatch => {
     );
 };
 
-// Delete post
+/**
+ * delete post
+ * @param {logged in user} id
+ */
 export const deletePost = id => dispatch => {
   axios
     .delete(`/api/posts/${id}`)
@@ -59,6 +62,38 @@ export const deletePost = id => dispatch => {
         payload: id
       })
     )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+/**
+ * adds a like to a post
+ * @param {postId} id
+ */
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(res => dispatch(getPosts()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+/**
+ * remove a like
+ * @param {postId} id
+ */
+export const removeLike = id => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${id}`)
+    .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
